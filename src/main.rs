@@ -1,25 +1,9 @@
-use std::collections::HashMap;
-
+pub mod models;
+use models::block::Block;
+use models::blockchain::Blockchain;
 use sha2::Digest;
 use sha2::Sha256;
-#[derive(Debug, Clone)]
-pub struct Block {
-    pub id: u64,
-    pub hash: String,
-    pub previous_hash: String,
-    pub timestamp: i64,
-    pub data: String,
-    pub nonce: u64,
-}
-
-#[derive(Debug, Clone)]
-struct Blockchain {
-    chain: Vec<Block>,
-    difficulty: u32,
-    reward: f32,
-    wallet_balances: HashMap<String, f32>,
-    // pending_transactions_vecs: Vec<Transaction>,
-}
+use std::collections::HashMap;
 
 fn hash_to_binary_representation(hash: &[u8]) -> String {
     let mut res: String = String::default();
@@ -66,7 +50,7 @@ impl Block {
 
 impl Blockchain {
     pub fn new() -> Self {
-        let mut chain = vec![Block::new(
+        let chain = vec![Block::new(
             0,
             String::from("0"),
             0,
@@ -84,6 +68,12 @@ impl Blockchain {
     pub fn add_block(&mut self, mut block: Block) {
         block.mine_block(self.difficulty);
         self.chain.push(block);
+    }
+}
+
+impl Default for Blockchain {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
