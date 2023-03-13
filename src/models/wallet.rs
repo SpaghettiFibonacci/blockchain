@@ -15,7 +15,7 @@ impl Wallet {
             SystemTime::now()
                 .duration_since(SystemTime::UNIX_EPOCH)
                 .unwrap()
-                .as_secs()
+                .as_nanos()
         ));
         let private_key = hash_to_binary_representation(&hasher.finalize());
         let mut hasher = Sha256::new();

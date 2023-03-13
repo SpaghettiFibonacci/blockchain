@@ -8,5 +8,5 @@ pub struct Blockchain {
     pub difficulty: u32,
     pub reward: f32,
     pub wallet_balances: HashMap<String, f32>,
-    // pub pending_transactions: Vec<Transaction>,
+    pub pending_transactions: Vec<Transaction>,
 }
