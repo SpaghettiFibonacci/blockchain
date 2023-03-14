@@ -58,17 +58,18 @@ impl Block {
         let mut return_value = true;
         if self.transaction.is_some() {
             for block in &blockchain.chain {
-                if block.transaction.is_some()
-                    && self.transaction.as_ref().unwrap().sender.public_key
+                if block.transaction.is_some() {
+                    if self.transaction.as_ref().unwrap().sender.public_key
                         == block.transaction.as_ref().unwrap().sender.public_key
-                    && block.transaction.as_ref().unwrap().sender.public_key
-                        == self.transaction.as_ref().unwrap().sender.public_key
-                {
-                    total_balance_sender += block.transaction.as_ref().unwrap().amount;
-                }
+                        && block.transaction.as_ref().unwrap().sender.public_key
+                            == self.transaction.as_ref().unwrap().sender.public_key
+                    {
+                        total_balance_sender += block.transaction.as_ref().unwrap().amount;
+                    }
 
-                if block.miner == self.transaction.as_ref().unwrap().sender.public_key {
-                    total_balance_sender += blockchain.reward;
+                    if block.miner == self.transaction.as_ref().unwrap().sender.public_key {
+                        total_balance_sender += blockchain.reward;
+                    }
                 }
             }
 
