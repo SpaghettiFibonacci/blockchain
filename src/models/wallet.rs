@@ -1,7 +1,7 @@
 use std::time::SystemTime;
 
 use sha2::{Digest, Sha256};
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Wallet {
     pub private_key: String,
     pub public_key: String,
